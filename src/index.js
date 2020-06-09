@@ -4,11 +4,13 @@ global.fileName = './data/grades.json';
 global.gradesData = null;
 
 const gradesRouter = require('./routes/grades.js');
+const infoRouter = require('./routes/info.js');
 const app = express();
 
 app.use(express.json());
 
 app.use('/grades', gradesRouter);
+app.use('/info', infoRouter);
 
 
 app.listen(3000, async () => {
