@@ -9,11 +9,10 @@ router.get('/', (_, res) => {
     delete data.nextId;
     res.send(data);
     } catch (err) {
-        res.status(400).send({ error: err.message});
+        res.sendStatus(400).send({ error: err.message});
         console.error(`GET /grades - ${err.message}`);
     }
 });
-
 
 router.get('/:id', async (req, res) => {
   try {
@@ -23,11 +22,11 @@ router.get('/:id', async (req, res) => {
     if (grade) {
       res.send(grade);
     } else {
-      res.status(400).send({error: 'Grade not found'});
+      res.sendStatus(400).send({error: 'Grade not found'});
       console.error('GET /grades/:id - Grade not found');
     }
   } catch {
-    res.status(400).send({ error: err.message});
+    res.sendStatus(400).send({ error: err.message});
     console.error(`GET /grades/:id - ${err.message}`);
   };
 });
@@ -45,7 +44,7 @@ router.post('/', async (req, res) => {
     
     res.send({"New Grade": grade});
   } catch (err) {
-      res.status(400).send({ error: err.message });
+      res.sendStatus(400).send({ error: err.message });
       console.error(`POST /grades - ${err.message}`);
   }
 });
@@ -66,7 +65,7 @@ router.put('/:id', async (req, res) => {
     await fs.writeFile(global.fileName, JSON.stringify(data));
     res.send('grade updated');
     } catch {
-      res.status(400).send({ error: err.message});
+      res.sendStatus(400).send({ error: err.message});
       console.error(`PUT /grades/:id - ${err.message}`);
     };
 });
@@ -82,7 +81,7 @@ router.delete('/:id', async (req, res) => {
     await fs.writeFile(global.fileName, JSON.stringify(data));
     res.send('Grade deleted');
   } catch {
-      res.status(400).send({ error: err.message});
+      res.sendStatus(400).send({ error: err.message});
       console.error(`DELETE /grades/:id - ${err.message}`);
     };
 });
